@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
 {
-    public class Base
+    public abstract class Base
     {
+        public string Name;
+        public Base(string name)
+        {
+            Name = name;
+        }
+        public abstract double Raschetfunc(double x);
 
+        public virtual double Proizvodn(double x);
     }
 }
