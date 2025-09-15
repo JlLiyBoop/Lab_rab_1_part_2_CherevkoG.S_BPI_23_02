@@ -7,6 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Введи функцию с одной переменной"/>
+        <Button Grid.Column="2" Grid.Row="0" Height="40" Width="120" Content="Рассчитать значение функции" VerticalAlignment="Bottom"/>
+        <TextBlock TextWrapping="Wrap" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top"
+                   Text="Рассчет значения функции при написанном значении переменной"
+                   TextAlignment="Center" FontSize="14" FontWeight="Bold"/>
+        <TextBox x:Name="znachx" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Height="40"/>
+        <TextBox x:Name="raschetfunc" Grid.Row="1" Grid.Column="2" Margin="10"/>
     </Grid>
 </Window>
