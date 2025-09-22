@@ -29,7 +29,7 @@
         <TextBlock Grid.Row="1" Grid.Column="0" Text="Основание:" 
                    Margin="0,0,10,10" VerticalAlignment="Center" Name="osn"/>
         <TextBox Grid.Row="1" Grid.Column="1" Name="osntext" 
-                 Margin="0,0,0,10" Text="10" IsEnabled="False"/>
+                 Margin="0,0,0,10" Text="10" IsEnabled="False"  TextChanged="Osntext_TextChanged"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Значение x:" 
                    Margin="0,0,10,10" VerticalAlignment="Center"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="xtext" 

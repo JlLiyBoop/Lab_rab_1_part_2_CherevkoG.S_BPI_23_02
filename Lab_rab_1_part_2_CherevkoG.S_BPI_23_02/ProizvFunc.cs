@@ -40,9 +40,9 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
 
         public override string FInfo()
         {
-            return $"Производная функции: {proizfunc.Name}" +
-                   $"Выражение: {proizvexp}" +
-                   $"Метод: численное дифференцирование";
+            return $"Производная функции: {proizfunc.Name}\n" +
+                   $"Выражение: {proizvexp}\n" +
+                   $"Метод: численное дифференцирование\n";
         }
 
 

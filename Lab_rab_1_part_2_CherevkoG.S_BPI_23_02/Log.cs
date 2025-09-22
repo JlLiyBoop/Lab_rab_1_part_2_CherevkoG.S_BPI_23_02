@@ -22,7 +22,7 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
         public override double Raschetfunc(double x)
         {
             if ( x < 0) { MessageBox.Show("Аргумент логарифма должно быть больше нуля"); }
-            return Math.Log(x) / Math.Log(_znachosn);    
+            return Math.Log(x, _znachosn);    
         }
         public override Base Proizvodn()
         {
@@ -31,7 +31,7 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
 
         public override string FInfo()
         {
-            return base.FInfo() + $"Основание: {_znachosn} Область определения: x > 0";
+            return base.FInfo() + $"Основание: {_znachosn} Область определения: x > 0\n";
         }
 
         public double Znachosn => _znachosn;

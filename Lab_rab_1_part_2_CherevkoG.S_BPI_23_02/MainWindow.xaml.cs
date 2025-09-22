@@ -45,15 +45,18 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 }
                 else if (functionType == "Log")
                 {
-                    if (ValidateOsn(out double osn))
-                    {
-                        thisBase = new Log(osn);
-                    }
-                    else
+                    if (!ValidateOsn(out double osn))
                     {
                         thisBase = null;
                         return;
                     }
+                    if (osn <= 0 || osn == 1)
+                    {
+                        MessageBox.Show("Основание должно быть больше 0 и не равно 1");
+                        thisBase = null;
+                        return;
+                    }
+                    thisBase = new Log(osn);
                 }
 
                 if (thisBase != null)
@@ -113,6 +116,13 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             if (typefunc.SelectedItem is ComboBoxItem selectedItem)
                 return selectedItem.Tag.ToString();
             return string.Empty;
+        }
+        private void Osntext_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (typefunc.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag.ToString() == "Log")
+            {
+                CreateBase("Log");
+            }
         }
         private bool ValidateOsn(out double osn)
         {
