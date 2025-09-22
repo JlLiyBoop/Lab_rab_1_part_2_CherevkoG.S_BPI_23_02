@@ -21,7 +21,8 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
         }
         public override double Raschetfunc(double x)
         {
-            return Math.Log(x) / Math.Log(Znachosn);
+            if ( x < 0) { MessageBox.Show("Аргумент логарифма должно быть больше нуля"); }
+            return Math.Log(x) / Math.Log(Znachosn);    
         }
     }
 }
