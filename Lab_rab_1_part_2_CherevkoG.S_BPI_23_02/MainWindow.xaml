@@ -34,9 +34,9 @@
                    Margin="0,0,10,10" VerticalAlignment="Center"/>
         <TextBox Grid.Row="2" Grid.Column="1" Name="xtext" 
                  Margin="0,0,0,10" Text="0"/>
-        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"
                     Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
-            <Button Name="schetButton" Content="Вычислить функцию" 
+            <Button Name="schetButton" Content="Вычислить функцию"
                     Width="150" Height="30" Margin="0,0,10,0" Click="schet_Click"/>
             <Button Name="proizvButton" Content="Вычислить производную" 
                     Width="150" Height="30" Click="proizv_Click"/>
