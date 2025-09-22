@@ -22,7 +22,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Text="Тип функции:" 
                    Margin="0,0,10,10" VerticalAlignment="Center"/>
         <ComboBox Grid.Row="0" Grid.Column="1" Name="typefunc"
-                  Margin="0,0,0,10" SelectionChanged="typefunc_SC">
+                  Margin="0,0,0,10" SelectionChanged="Typefunc_SC">
             <ComboBoxItem Content="Натуральный логарифм" Tag="Ln"/>
             <ComboBoxItem Content="Логарифм" Tag="Log"/>
         </ComboBox>

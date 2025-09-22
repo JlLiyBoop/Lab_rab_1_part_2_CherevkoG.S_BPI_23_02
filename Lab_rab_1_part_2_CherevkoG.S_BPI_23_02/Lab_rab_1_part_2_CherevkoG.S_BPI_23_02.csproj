@@ -64,6 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base.cs" />
+    <Compile Include="ProizvFunc.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Ln.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -24,9 +24,9 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             InitializeComponent();
             typefunc.SelectedIndex = 0;
         }
-        private void typefunc_SC(object sender , SelectedCellsChangedEventArgs e)
+        private void Typefunc_SC(object sender, SelectionChangedEventArgs e)
         {
-            if (typefunc.SelectedItem is ComboBox selectedItem)
+            if (typefunc.SelectedItem is ComboBoxItem selectedItem)
             {
                 string functionType = selectedItem.Tag.ToString();
                 osntext.IsEnabled = (functionType == "Log");
@@ -83,6 +83,29 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             }
             catch (Exception ex) {
                 MessageBox.Show("Что-то пошло не так");
+            }
+        }
+        private void proizv_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (thisBase == null)
+                {
+                    MessageBox.Show("Сначала создайте функцию");
+                    return;
+                }
+
+                if (!ValidateX(out double x))
+                    return;
+
+                Base proizv = thisBase.Proizvodn();
+                double proizvznach = proizv.Raschetfunc(x);
+
+                resulttext.Text = $"f'({x}) = {proizvznach}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка вычисления производной: {ex.Message}");
             }
         }
         private string GetfType()

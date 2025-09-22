@@ -9,20 +9,31 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
 {
     internal class Log : Base
     {
-        private double Znachosn;
+        private double _znachosn;
 
-        public Log(double znachosn) : base("Логарифм")
+        public Log(double znachosn) : base($"log{znachosn}(x)")
         {
             if (znachosn <= 0 || znachosn == 1 )
             {
                 MessageBox.Show("Значение основания логарифма должно быть больше нуля и не равно единице!");
             }
-            Znachosn = znachosn;
+            _znachosn = znachosn;
         }
         public override double Raschetfunc(double x)
         {
             if ( x < 0) { MessageBox.Show("Аргумент логарифма должно быть больше нуля"); }
-            return Math.Log(x) / Math.Log(Znachosn);    
+            return Math.Log(x) / Math.Log(_znachosn);    
         }
+        public override Base Proizvodn()
+        {
+            return new ProizvFunc(this, $"1/(x * ln({_znachosn}))");
+        }
+
+        public override string FInfo()
+        {
+            return base.FInfo() + $"Основание: {_znachosn} Область определения: x > 0";
+        }
+
+        public double Znachosn => _znachosn;
     }
 }

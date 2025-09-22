@@ -15,7 +15,12 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
         }
         public abstract double Raschetfunc(double x);
 
-        public virtual Base Proizvodn(double x);
+        public virtual Base Proizvodn()
+        {
+            {
+                throw new NotImplementedException("Виртуальная беда");
+            }
+        }
 
         public virtual string FInfo()
         {
