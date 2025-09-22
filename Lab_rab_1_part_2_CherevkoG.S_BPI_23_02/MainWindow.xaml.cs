@@ -18,9 +18,11 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
 
     public partial class MainWindow : Window
     {
+        private Base thisBase;
         public MainWindow()
         {
             InitializeComponent();
+            typefunc.SelectedIndex = 0;
         }
         private void typefunc_SC(object sender , SelectedCellsChangedEventArgs e)
         {
@@ -29,20 +31,55 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 string functionType = selectedItem.Tag.ToString();
                 osntext.IsEnabled = (functionType == "Log");
                 osn.IsEnabled = (functionType == "Log");
+
+                CreateBase(functionType);
             }   
+        }
+        private void CreateBase(string functionType)
+        {
+            try
+            {
+                if (functionType == "Ln")
+                {
+                    thisBase = new Ln();
+                }
+                else if (functionType == "Log")
+                {
+                    if (ValidateOsn(out double osn))
+                    {
+                        thisBase = new Log(osn);
+                    }
+                    else
+                    {
+                        thisBase = null;
+                        return;
+                    }
+                }
+
+                if (thisBase != null)
+                {
+                    infotext.Text = thisBase.FInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка создания функции: {ex.Message}");
+                thisBase = null;
+            }
         }
         private void schet_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string ftype = GetfType();
-                double osn = 0;
-                double x = 0;
-                if (ftype == "Log")
+                if (thisBase == null)
                 {
-                    if (!ValidateOsn(out osn)) { return; }
+                    MessageBox.Show("Сначала выбери функцию");
                 }
-                if (!ValidateX(out x)) { return; }
+                
+                if (!ValidateX(out double x)) { return; }
+
+                double result = thisBase.Raschetfunc(x);
+                resulttext.Text = $"f({x}) = {result}";
             }
             catch (Exception ex) {
                 MessageBox.Show("Что-то пошло не так");
