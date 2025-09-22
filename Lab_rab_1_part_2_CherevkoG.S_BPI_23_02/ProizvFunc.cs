@@ -23,6 +23,9 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             double h = 0.0001;
             try
             {
+                if (x <= 0) {
+                throw new ArgumentException("Для логарифма x должен быть больше 0");
+            }
                 double f_x_plus_h = proizfunc.Raschetfunc(x + h);
                 double f_x = proizfunc.Raschetfunc(x);
                 return (f_x_plus_h - f_x) / h;

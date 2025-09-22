@@ -45,6 +45,12 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 }
                 else if (functionType == "Log")
                 {
+                    if (string.IsNullOrWhiteSpace(osntext.Text))
+                    {
+                        thisBase = null;
+                        infotext.Text = "Введите основание логарифма";
+                        return;
+                    }
                     if (!ValidateOsn(out double osn))
                     {
                         thisBase = null;
@@ -77,6 +83,7 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 if (thisBase == null)
                 {
                     MessageBox.Show("Сначала выбери функцию");
+                    return;
                 }
                 
                 if (!ValidateX(out double x)) { return; }
@@ -86,6 +93,7 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             }
             catch (Exception ex) {
                 MessageBox.Show("Что-то пошло не так");
+                resulttext.Text = "Ошибка";
             }
         }
         private void proizv_Click(object sender, RoutedEventArgs e)
@@ -109,14 +117,10 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка вычисления производной: {ex.Message}");
+                resulttext.Text = "Ошибка";
             }
         }
-        private string GetfType()
-        {
-            if (typefunc.SelectedItem is ComboBoxItem selectedItem)
-                return selectedItem.Tag.ToString();
-            return string.Empty;
-        }
+
         private void Osntext_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (typefunc.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag.ToString() == "Log")
@@ -132,8 +136,8 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 MessageBox.Show("Введите основание логарифма");
                 return false;
             }
-
-            if (!double.TryParse(osntext.Text, out osn))
+            string osnText = osntext.Text.Replace('.', ',');
+            if (!double.TryParse(osnText, out osn))
             {
                 MessageBox.Show("Основание должно быть числом");
                 return false;
@@ -156,8 +160,8 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 MessageBox.Show("Введите значение x");
                 return false;
             }
-
-            if (!double.TryParse(xtext.Text, out x))
+            string xText = xtext.Text.Replace('.', ',');
+            if (!double.TryParse(xText, out x))
             {
                 MessageBox.Show("x должен быть числом");
                 return false;
