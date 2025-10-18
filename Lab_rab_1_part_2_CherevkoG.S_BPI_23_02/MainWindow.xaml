@@ -5,86 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab_rab_1_part_2_CherevkoG.S_BPI_23_02"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="600" MinHeight="320" MinWidth="500" MaxHeight="450" MaxWidth="800">
+        Title="Лабораторная работа 1.2 Черевко Григорий" 
+        Height="400" 
+        Width="600" 
+        MinHeight="320" 
+        MinWidth="500" 
+        MaxHeight="450" 
+        MaxWidth="800"
+        Style="{DynamicResource CustomWindowStyle}">
 
     <Window.Resources>
-        <Style x:Key="LightTheme" TargetType="Control">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="BorderBrush" Value="LightGray"/>
-        </Style>
-
-        <Style x:Key="DarkTheme" TargetType="Control">
-            <Setter Property="Background" Value="#FF2D2D30"/>
-            <Setter Property="Foreground" Value="#FFD0D0D0"/>
-            <Setter Property="BorderBrush" Value="#FF3E3E42"/>
-        </Style>
-
-        <Style x:Key="ThemeToggleButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF007ACC"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#FF005A9E"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF1C97EA"/>
-                    <Setter Property="BorderBrush" Value="#FF007ACC"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="DarkTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#FF1E1E1E"/>
-            <Setter Property="Foreground" Value="#FFD0D0D0"/>
-            <Setter Property="BorderBrush" Value="#FF3E3E42"/>
-            <Setter Property="CaretBrush" Value="#FFD0D0D0"/>
-            <Setter Property="SelectionBrush" Value="#FF007ACC"/>
-        </Style>
-        <Style x:Key="DarkComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Background" Value="#FF1E1E1E"/>
-            <Setter Property="Foreground" Value="#FFD0D0D0"/>
-            <Setter Property="BorderBrush" Value="#FF3E3E42"/>
-        </Style>
-        <Style x:Key="DarkButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#FF333337"/>
-            <Setter Property="Foreground" Value="#FFD0D0D0"/>
-            <Setter Property="BorderBrush" Value="#FF555555"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#FF46464A"/>
-                    <Setter Property="BorderBrush" Value="#FF666666"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <DropShadowBitmapEffect x:Key="NormalShadow" ShadowDepth="2" Softness="0.2" Opacity="0.64"/>
     </Window.Resources>
 
-    <Grid Margin="20" Name="MainGrid" Background="White">
+    <Grid Margin="20,0, 20, 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <Button Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                Name="ThemeToggleButton" Content="Темная тема" 
-                Style="{StaticResource ThemeToggleButtonStyle}"
-                HorizontalAlignment="Right" Click="ThemeToggleButton_Click"/>
-
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Тип функции:" 
-                   Margin="0,10,10,10" VerticalAlignment="Center" Name="TypeFuncText"/>
-        <ComboBox Grid.Row="1" Grid.Column="1" Name="typefunc"
-                  Margin="0,10,0,10" SelectionChanged="Typefunc_SC">
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5">
+            <MenuItem Header="Темы">
+                <MenuItem Header="Доступные темы" IsEnabled="False"/>
+                <MenuItem Header="Светлая" Click="ChangeTheme" Uid="0"/>
+                <MenuItem Header="Темная" Click="ChangeTheme" Uid="1"/>
+  
+            </MenuItem>
+        </Menu>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Тип функции:" Margin="0,0,10,10" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Name="typefunc" Margin="0,0,0,10" SelectionChanged="Typefunc_SC">
             <ComboBoxItem Content="Натуральный логарифм" Tag="Ln"/>
             <ComboBoxItem Content="Логарифм" Tag="Log"/>
         </ComboBox>
@@ -95,12 +52,13 @@
                  Margin="0,0,0,10" Text="10" IsEnabled="False"  TextChanged="Osntext_TextChanged"/>
 
         <TextBlock Grid.Row="3" Grid.Column="0" Text="Значение x:" 
-                   Margin="0,0,10,10" VerticalAlignment="Center" Name="XValueText"/>
+                   Margin="0,0,10,10" VerticalAlignment="Center"/>
         <TextBox Grid.Row="3" Grid.Column="1" Name="xtext" 
                  Margin="0,0,0,10" Text="0"/>
 
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"
-                    Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                    VerticalAlignment="Center" Orientation="Horizontal" 
+                    HorizontalAlignment="Center" Margin="0,0,0,20">
             <Button Name="schetButton" Content="Вычислить функцию"
                     Width="150" Height="30" Margin="0,0,10,0" Click="schet_Click"/>
             <Button Name="proizvButton" Content="Вычислить производную" 
@@ -108,13 +66,13 @@
         </StackPanel>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Text="Информация:" 
-                   Margin="0,0,10,10" VerticalAlignment="Center" Name="InfoText"/>
+                   Margin="0,0,10,10" VerticalAlignment="Center"/>
         <TextBox Grid.Row="5" Grid.Column="1" Name="infotext" 
                  Margin="0,0,0,10" Height="90" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Text="Результат:" 
-                   Margin="0,0,10,10" VerticalAlignment="Center" Name="ResultText"/>
+                   Margin="0,0,10,10" VerticalAlignment="Center"/>
         <TextBox Grid.Row="6" Grid.Column="1" Name="resulttext" 
                  Margin="0,0,0,10" Height="90" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto" TextWrapping="Wrap"/>

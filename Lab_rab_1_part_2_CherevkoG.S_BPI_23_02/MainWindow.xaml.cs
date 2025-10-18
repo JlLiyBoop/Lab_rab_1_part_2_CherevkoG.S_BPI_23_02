@@ -20,80 +20,27 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
     {
         private Base thisBase;
 
-        private bool DarkTheme = false;
         public MainWindow()
         {
             InitializeComponent();
             typefunc.SelectedIndex = 0;
+
+            ThemesController.SetTheme(ThemesController.ThemeType.Dark);
         }
 
-        private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
+        private void ChangeTheme(object sender, RoutedEventArgs e)
         {
-            DarkTheme = !DarkTheme;
-            ChangeTheme();
-        }
-
-        private void ChangeTheme()
-        {
-            var background = DarkTheme ? Color.FromRgb(45, 45, 48) : Colors.White;
-            var foreground = DarkTheme ? Color.FromRgb(208, 208, 208) : Colors.Black;
-            var controlbackground = DarkTheme ? Color.FromRgb(30, 30, 30) : Colors.White;
-            var border = DarkTheme ? Color.FromRgb(62, 62, 66) : Colors.LightGray;
-            var buttonbackground = DarkTheme ? Color.FromRgb(51, 51, 55) : Color.FromRgb(221, 221, 221);
-
-            MainGrid.Background = new SolidColorBrush(background);
-
-            this.Background = new SolidColorBrush(background);
-            MainGrid.Background = new SolidColorBrush(background);
-
-            foreach (TextBlock textBlock in FindAllInType<TextBlock>(this))
+            switch (int.Parse(((MenuItem)sender).Uid))
             {
-                textBlock.Foreground = new SolidColorBrush(foreground);
+                case 0:
+                    ThemesController.SetTheme(ThemesController.ThemeType.Light);
+                    break;
+                case 1:
+                    ThemesController.SetTheme(ThemesController.ThemeType.Dark);
+                    break;
             }
 
-            typefunc.Background = new SolidColorBrush(controlbackground);
-            typefunc.Foreground = new SolidColorBrush(foreground);
-            typefunc.BorderBrush = new SolidColorBrush(border);
-
-            foreach (TextBox textBox in FindAllInType<TextBox>(this))
-            {
-                textBox.Background = new SolidColorBrush(controlbackground);
-                textBox.Foreground = new SolidColorBrush(foreground);
-                textBox.BorderBrush = new SolidColorBrush(border);
-                textBox.CaretBrush = new SolidColorBrush(foreground);
-            }
-
-            foreach (Button button in FindAllInType<Button>(this))
-            {
-                if (button != ThemeToggleButton)
-                {
-                    button.Background = new SolidColorBrush(buttonbackground);
-                    button.Foreground = new SolidColorBrush(foreground);
-                    button.BorderBrush = new SolidColorBrush(border);
-                }
-            }
-
-            ThemeToggleButton.Content = DarkTheme ? "Светлая тема" : "Темная тема";
-        }
-
-        private static IEnumerable<T> FindAllInType<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj != null)
-            {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-                {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
-
-                    foreach (T childOfChild in FindAllInType<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
-                }
-            }
+            e.Handled = true;
         }
         private void Typefunc_SC(object sender, SelectionChangedEventArgs e)
         {
@@ -104,7 +51,7 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                 osn.IsEnabled = (functionType == "Log");
 
                 CreateBase(functionType);
-            }   
+            }
         }
         private void CreateBase(string functionType)
         {
@@ -156,13 +103,14 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
                     MessageBox.Show("Сначала выбери функцию");
                     return;
                 }
-                
+
                 if (!ValidateX(out double x)) { return; }
 
                 double result = thisBase.Raschetfunc(x);
                 resulttext.Text = $"f({x}) = {result}";
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show("Что-то пошло не так");
                 resulttext.Text = "Ошибка";
             }
