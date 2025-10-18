@@ -19,10 +19,81 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
     public partial class MainWindow : Window
     {
         private Base thisBase;
+
+        private bool DarkTheme = false;
         public MainWindow()
         {
             InitializeComponent();
             typefunc.SelectedIndex = 0;
+        }
+
+        private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            DarkTheme = !DarkTheme;
+            ChangeTheme();
+        }
+
+        private void ChangeTheme()
+        {
+            var background = DarkTheme ? Color.FromRgb(45, 45, 48) : Colors.White;
+            var foreground = DarkTheme ? Color.FromRgb(208, 208, 208) : Colors.Black;
+            var controlbackground = DarkTheme ? Color.FromRgb(30, 30, 30) : Colors.White;
+            var border = DarkTheme ? Color.FromRgb(62, 62, 66) : Colors.LightGray;
+            var buttonbackground = DarkTheme ? Color.FromRgb(51, 51, 55) : Color.FromRgb(221, 221, 221);
+
+            MainGrid.Background = new SolidColorBrush(background);
+
+            this.Background = new SolidColorBrush(background);
+            MainGrid.Background = new SolidColorBrush(background);
+
+            foreach (TextBlock textBlock in FindAllInType<TextBlock>(this))
+            {
+                textBlock.Foreground = new SolidColorBrush(foreground);
+            }
+
+            typefunc.Background = new SolidColorBrush(controlbackground);
+            typefunc.Foreground = new SolidColorBrush(foreground);
+            typefunc.BorderBrush = new SolidColorBrush(border);
+
+            foreach (TextBox textBox in FindAllInType<TextBox>(this))
+            {
+                textBox.Background = new SolidColorBrush(controlbackground);
+                textBox.Foreground = new SolidColorBrush(foreground);
+                textBox.BorderBrush = new SolidColorBrush(border);
+                textBox.CaretBrush = new SolidColorBrush(foreground);
+            }
+
+            foreach (Button button in FindAllInType<Button>(this))
+            {
+                if (button != ThemeToggleButton)
+                {
+                    button.Background = new SolidColorBrush(buttonbackground);
+                    button.Foreground = new SolidColorBrush(foreground);
+                    button.BorderBrush = new SolidColorBrush(border);
+                }
+            }
+
+            ThemeToggleButton.Content = DarkTheme ? "Светлая тема" : "Темная тема";
+        }
+
+        private static IEnumerable<T> FindAllInType<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindAllInType<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
         private void Typefunc_SC(object sender, SelectionChangedEventArgs e)
         {
