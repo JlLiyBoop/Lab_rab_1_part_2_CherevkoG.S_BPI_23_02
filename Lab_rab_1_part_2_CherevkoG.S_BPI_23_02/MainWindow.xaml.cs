@@ -47,8 +47,12 @@ namespace Lab_rab_1_part_2_CherevkoG.S_BPI_23_02
             if (typefunc.SelectedItem is ComboBoxItem selectedItem)
             {
                 string functionType = selectedItem.Tag.ToString();
-                osntext.IsEnabled = (functionType == "Log");
-                osn.IsEnabled = (functionType == "Log");
+
+                bool isLog = (functionType == "Log");
+                osn.Visibility = isLog ? Visibility.Visible : Visibility.Collapsed;
+                osntext.Visibility = isLog ? Visibility.Visible : Visibility.Collapsed;
+                osntext.IsEnabled = isLog;
+                osn.IsEnabled = isLog;
 
                 CreateBase(functionType);
             }
